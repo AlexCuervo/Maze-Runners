@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 816218afd9a099c4196580ef7ff0e410
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Spot: {fileID: 5910521705436329275, guid: d06d291752d01184baf461ef0a622f7b, type: 3}
+  - Block: {fileID: 3834129194133590783, guid: 137c24d5c4beb724f8d2707a45984afa, type: 3}
+  - MazeArea: {fileID: 7902984899543128624, guid: d36ac33e3c215f44e8bf02316a1d0224, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
