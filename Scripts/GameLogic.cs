@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using System;
-using Random = UnityEngine.Random; //random
+using Random = UnityEngine.Random;
 public class GameLogic : MonoBehaviour
 {
     public int BoardSize;
