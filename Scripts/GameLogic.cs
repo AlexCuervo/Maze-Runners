@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
+using Vector3 = UnityEngine.Vector3;
 public class GameLogic : MonoBehaviour
 {
     public int BoardSize;
@@ -35,7 +36,7 @@ public class GameLogic : MonoBehaviour
                 GameObject BoardSpot = GameObject.Instantiate(Spot);
                 BoardSpot.GetComponent<Spot>().row = j;
                 BoardSpot.GetComponent<Spot>().column = i;
-                BoardSpot.transform.position = new UnityEngine.Vector3(i,0,-j);
+                BoardSpot.transform.position = new(i,0,-j);
                 BoardSpot.transform.SetParent(Floor.transform, false);
             }
         }
@@ -77,8 +78,8 @@ public class GameLogic : MonoBehaviour
             if(mazeMask[spotRow,spotColumn]){
                 GameObject Wall = GameObject.Instantiate(Block);
                 Wall.transform.SetParent(spot, false);
-                Wall.transform.localPosition = new UnityEngine.Vector3 (0,50,0);
-                Wall.transform.localScale = new UnityEngine.Vector3 (1,100,1);
+                Wall.transform.localPosition = new(0,50,0);
+                Wall.transform.localScale = new(1,100,1);
             }
 
         }         

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class CentralizeCamera : MonoBehaviour
 {
@@ -15,13 +16,13 @@ public class CentralizeCamera : MonoBehaviour
         BoardSize = GameObject.FindWithTag("GameManager").transform.GetComponent<GameLogic>().BoardSize;
         Maze = GameObject.FindWithTag("MazeArea");
         Transform[] MazeChildren = Maze.GetComponentsInChildren<Transform>();
-        UnityEngine.Vector3 offset = new UnityEngine.Vector3 (0,BoardSize + 3,-5);
+        Vector3 offset = new(0,BoardSize + 3,-5);
     
         
         if(BoardSize%2==0)target = MazeChildren[MazeChildren.Length/2 - BoardSize/2];
         else target = MazeChildren[(MazeChildren.Length+1)/2];
         
-        UnityEngine.Vector3 desiredPosition = target.position + offset;
+        Vector3 desiredPosition = target.position + offset;
         transform.position = desiredPosition;        
         transform.LookAt(target.transform);
     }
