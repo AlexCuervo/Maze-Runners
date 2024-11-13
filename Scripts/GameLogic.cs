@@ -20,8 +20,8 @@ public class GameLogic : MonoBehaviour
     public GameObject stunEnemyBoost;
     public GameObject invertEnemyControlsBoost;
     public GameObject goal;
-    public GameObject player1;
-    public GameObject player2;
+    GameObject player1;
+    GameObject player2;
     // public GameObject
 
     bool Started = false;
@@ -58,8 +58,11 @@ public class GameLogic : MonoBehaviour
         List<GameObject> availableSpots = new();
         List<GameObject> objectsList = new(){locationTrap, stunTrap, slowTrap, relocateGoalTrap, speedBoost, stunEnemyBoost, invertEnemyControlsBoost};
         for(int i = 0; i < MazeArea.transform.childCount; i++){
-            if(MazeArea.transform.GetChild(i).childCount == 0){
-                availableSpots.Add(MazeArea.transform.GetChild(i).gameObject);
+            Transform cell = MazeArea.transform.GetChild(i);
+            int row = cell.GetComponent<Spot>().row;
+            int column = cell.GetComponent<Spot>().column;
+            if(cell.childCount == 0 && ((row != 1 && row != BoardSize-1) || (column != 1 && column != BoardSize-1))){
+                availableSpots.Add(cell.gameObject);
                 i++;
             }
         
@@ -126,6 +129,22 @@ public class GameLogic : MonoBehaviour
                 if(i%2 == 0 || j%2 == 0)mazeMask[i,j] = true;
             }
         }
+        
+        MazeDFS(mazeMask, 1, 1, 1, 1, movesRow, movesColumn, visitedSpots);
+
+        for(int i = 1; i< BoardSize - 1; i++){                              //this loop eliminates isolated blocks and unreachable paths over the Maze
+            for(int j = 1; j < BoardSize - 1; j++){
+                if(!mazeMask[i+1,j] && !mazeMask[i-1,j] && !mazeMask[i,j+1] && !mazeMask[i,j-1]){
+                   int randomIndex = Random.Range(0,4);
+                   mazeMask[i + movesRow[randomIndex],j + movesColumn[randomIndex]] = true; 
+                }
+                if(mazeMask[i+1,j] && mazeMask[i-1,j] && mazeMask[i,j+1] && mazeMask[i,j-1]){
+                    int randomIndex = Random.Range(0,4);
+                    mazeMask[i + movesRow[randomIndex],j + movesColumn[randomIndex]] = false; 
+                }
+            }
+        }
+        
         for(int i = 0; i<3;i++){                        //this loop eliminates the blocks in the center of the maze
             for(int j = 0; j < 3; j++){
                 int row = BoardSize/2 - 1 + i;
@@ -133,8 +152,6 @@ public class GameLogic : MonoBehaviour
                 mazeMask[row,column] = false;
             }
         }
-
-        MazeDFS(mazeMask, 1, 1, 1, 1, movesRow, movesColumn, visitedSpots);
 
         for(int i = 0; i < MazeArea.transform.childCount; i++){
             Transform spot = MazeArea.transform.GetChild(i);

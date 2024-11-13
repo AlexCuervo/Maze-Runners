@@ -36,13 +36,13 @@ public class CentralizeCamera : MonoBehaviour
         Centralize();
         rotationPoint = transform.position + new Vector3(0,0,5);
     }
-    // void Update()
-    // {
-    //     if(Input.GetKey(KeyCode.Q)) {
-    //         Rotate(true);
-    //     }
-    //     else if(Input.GetKey(KeyCode.E)){
-    //         Rotate(false);
-    //     } 
-    // }
+    void Update()
+    {
+        // if(Input.GetKey(KeyCode.Q)) {
+        //     Rotate(true);
+        // }
+        // else if(Input.GetKey(KeyCode.E)){
+        //     Rotate(false);
+        // } 
+    }
 }
