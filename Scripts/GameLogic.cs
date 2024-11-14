@@ -22,8 +22,6 @@ public class GameLogic : MonoBehaviour
     public GameObject goal;
     GameObject player1;
     GameObject player2;
-    // public GameObject
-
     bool Started = false;
     GameObject MazeArea;
     
@@ -61,7 +59,7 @@ public class GameLogic : MonoBehaviour
             Transform cell = MazeArea.transform.GetChild(i);
             int row = cell.GetComponent<Spot>().row;
             int column = cell.GetComponent<Spot>().column;
-            if(cell.childCount == 0 && ((row != 1 && row != BoardSize-1) || (column != 1 && column != BoardSize-1))){
+            if(cell.childCount == 0 && ((row != 1 && row != BoardSize-1) || (column != 1 && column != BoardSize-1)) && row != (BoardSize+1)/2 && column != (BoardSize+1)/2){
                 availableSpots.Add(cell.gameObject);
                 i++;
             }
@@ -69,7 +67,8 @@ public class GameLogic : MonoBehaviour
         }
         for(int i = 0; i < availableSpots.Count/15; i++){
             int randomIndex = Random.Range(0,objectsList.Count);
-            InstantiateAtPosition(objectsList[randomIndex],availableSpots[Random.Range(0,availableSpots.Count)].transform, new Vector3 (0,1,0), new Vector3 (1,1,1), "Untagged");
+            if(objectsList[randomIndex] == stunEnemyBoost)InstantiateAtPosition(objectsList[randomIndex],availableSpots[Random.Range(0,availableSpots.Count)].transform, new Vector3 (0,1,0), new Vector3 (1,1,1), "StunBoost");
+            else InstantiateAtPosition(objectsList[randomIndex],availableSpots[Random.Range(0,availableSpots.Count)].transform, new Vector3 (0,1,0), new Vector3 (1,1,1), "Untagged");
             if(randomIndex==3)objectsList.Remove(objectsList[3]);
         }        
     }
@@ -132,19 +131,6 @@ public class GameLogic : MonoBehaviour
         
         MazeDFS(mazeMask, 1, 1, 1, 1, movesRow, movesColumn, visitedSpots);
 
-        for(int i = 1; i< BoardSize - 1; i++){                              //this loop eliminates isolated blocks and unreachable paths over the Maze
-            for(int j = 1; j < BoardSize - 1; j++){
-                if(!mazeMask[i+1,j] && !mazeMask[i-1,j] && !mazeMask[i,j+1] && !mazeMask[i,j-1]){
-                   int randomIndex = Random.Range(0,4);
-                   mazeMask[i + movesRow[randomIndex],j + movesColumn[randomIndex]] = true; 
-                }
-                if(mazeMask[i+1,j] && mazeMask[i-1,j] && mazeMask[i,j+1] && mazeMask[i,j-1]){
-                    int randomIndex = Random.Range(0,4);
-                    mazeMask[i + movesRow[randomIndex],j + movesColumn[randomIndex]] = false; 
-                }
-            }
-        }
-        
         for(int i = 0; i<3;i++){                        //this loop eliminates the blocks in the center of the maze
             for(int j = 0; j < 3; j++){
                 int row = BoardSize/2 - 1 + i;
@@ -162,7 +148,7 @@ public class GameLogic : MonoBehaviour
                 InstantiateAtPosition(Block, spot, new Vector3 (0,70,0), new Vector3(1,140,1), "Untagged");
             }
             if(spotRow==BoardSize/2 && spotColumn==BoardSize/2){
-                InstantiateAtPosition(goal, spot, new Vector3(0,200,0), new Vector3(1,400,1), "Untagged");
+                InstantiateAtPosition(goal, spot, new Vector3(0,200,0), new Vector3(1,400,1), "Goal");
             }
         }
        

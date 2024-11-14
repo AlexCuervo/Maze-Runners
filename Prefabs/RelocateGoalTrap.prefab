@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 8909318778839231129}
   - component: {fileID: 1377767341530120278}
   - component: {fileID: -6579904563746037943}
+  - component: {fileID: 3818017802592521488}
   m_Layer: 0
   m_Name: RelocateGoalTrap
-  m_TagString: Untagged
+  m_TagString: RelocateGoal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,3 +123,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be17110aaf6fe9d4aa683b6c4d6f8ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disabledMaterial: {fileID: 2100000, guid: 0c91566a5bff3d34facc0cd5bd116391, type: 2}
+  originalMaterial: {fileID: 2100000, guid: c90f48917be0e964eb3b160eff72de99, type: 2}
+  speed: 0
+  inputHorizontalMovement: 0
+  inputVerticalMovement: 0
+--- !u!114 &3818017802592521488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247085084645129465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a02ba9aa5e52be44dbd4732b2fb52b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disabledMaterial: {fileID: 2100000, guid: 0c91566a5bff3d34facc0cd5bd116391, type: 2}
+  originalMaterial: {fileID: 2100000, guid: c90f48917be0e964eb3b160eff72de99, type: 2}
+  speed: 0
+  inputHorizontalMovement: 0
+  inputVerticalMovement: 0

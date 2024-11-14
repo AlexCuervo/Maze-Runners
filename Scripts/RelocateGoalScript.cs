@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Locationeffect : Effect
+public class RelocateGoalScript : Effect
 {
-
     public override void ActivateEffect(GameObject target){
+        GameObject goal = GameObject.FindWithTag("Goal");
         GameObject MazeArea = GameObject.FindWithTag("MazeArea");
         List<Transform> availableSpots = new();
         for(int i = 0; i < MazeArea.transform.childCount; i++){
             if(MazeArea.transform.GetChild(i).childCount == 0){
                 availableSpots.Add(MazeArea.transform.GetChild(i));
+                isActivated = true;
             }
         } 
         int randomIndex = Random.Range(0,availableSpots.Count);
-        target.transform.position = availableSpots[randomIndex].position + new Vector3(0,1,0);
-        StartCoroutine(RevertAfterTime(15f));
+        goal.transform.position = availableSpots[randomIndex].position + new Vector3(0,2,0);
     }
     void Start()
     {

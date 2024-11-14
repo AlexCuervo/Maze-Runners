@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3202944619574215235}
   - component: {fileID: 1649472528848396840}
   - component: {fileID: -1544911278208332788}
+  - component: {fileID: -8167430061642027263}
   m_Layer: 0
   m_Name: SpeedBoost
   m_TagString: Untagged
@@ -122,3 +123,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be17110aaf6fe9d4aa683b6c4d6f8ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disabledMaterial: {fileID: 2100000, guid: 0c91566a5bff3d34facc0cd5bd116391, type: 2}
+  originalMaterial: {fileID: 2100000, guid: 6afd45abd250e9744b650d0572f1bf8f, type: 2}
+  speed: 0
+  inputHorizontalMovement: 0
+  inputVerticalMovement: 0
+--- !u!114 &-8167430061642027263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6067826975749777512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f04fa3196baae4787996a4510a3436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disabledMaterial: {fileID: 2100000, guid: 0c91566a5bff3d34facc0cd5bd116391, type: 2}
+  originalMaterial: {fileID: 2100000, guid: 6afd45abd250e9744b650d0572f1bf8f, type: 2}
+  speed: 0
+  inputHorizontalMovement: 0
+  inputVerticalMovement: 0

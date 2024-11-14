@@ -1,21 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Effect : MonoBehaviour
 {
+    protected GameObject target;
     protected bool isActivated = false;
-    public virtual void ActivateEffect(GameObject target){
-        Debug.Log($"{target.tag} ha activado un efecto");
-        isActivated = true;
-    }
+    public Material disabledMaterial;
+    public Material originalMaterial;
+    public float speedPlayer1;
+    public float speedPlayer2;
 
+    protected  virtual IEnumerator RevertAfterTime(float duration){
+        yield return new WaitForSeconds(duration);
+        GetComponent<Renderer>().material = originalMaterial;
+        isActivated = false;
+    }
+    public virtual void ActivateEffect(GameObject target){}
 
     void OnTriggerEnter(Collider other){
-       if((other.CompareTag("player1") || other.CompareTag("player2")) && !isActivated){
+        if((other.CompareTag("player1") || other.CompareTag("player2")) && !isActivated){
+            target = other.gameObject;
+            if(target.CompareTag("player1")) speedPlayer1 = target.GetComponent<PlayerMovement>().speed;
+            else speedPlayer2 = target.GetComponent<PlayerMovement>().speed;
             ActivateEffect(other.gameObject);
-       } 
+            transform.GetComponent<Renderer>().material = disabledMaterial;
+            isActivated = true;
+        
+        } 
     }
 
 
@@ -27,8 +41,6 @@ public class Effect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isActivated){
-            GetComponent<Renderer>().material.color = Color.white;
-        }
+       
     }
 }

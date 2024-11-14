@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7482425812764271050}
   - component: {fileID: 7735312830913591136}
   - component: {fileID: -8086211221996070843}
+  - component: {fileID: -1935331876071742709}
   m_Layer: 0
   m_Name: StunTrap
   m_TagString: Untagged
@@ -122,3 +123,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be17110aaf6fe9d4aa683b6c4d6f8ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disabledMaterial: {fileID: 2100000, guid: 0c91566a5bff3d34facc0cd5bd116391, type: 2}
+  originalMaterial: {fileID: 2100000, guid: df1affdfa9f52c7448d1f0211861c75a, type: 2}
+  speed: 0
+  inputHorizontalMovement: 0
+  inputVerticalMovement: 0
+--- !u!114 &-1935331876071742709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6017710947779553310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8bceb9128b8d34494e7990294d8fbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disabledMaterial: {fileID: 2100000, guid: 0c91566a5bff3d34facc0cd5bd116391, type: 2}
+  originalMaterial: {fileID: 2100000, guid: df1affdfa9f52c7448d1f0211861c75a, type: 2}
+  speed: 0
+  inputHorizontalMovement: 0
+  inputVerticalMovement: 0

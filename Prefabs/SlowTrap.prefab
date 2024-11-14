@@ -123,6 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be17110aaf6fe9d4aa683b6c4d6f8ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disabledMaterial: {fileID: 2100000, guid: 0c91566a5bff3d34facc0cd5bd116391, type: 2}
+  originalMaterial: {fileID: 2100000, guid: 9cfe05c279512db4c9cdcf0ec12629ea, type: 2}
+  speed: 0
+  inputHorizontalMovement: 0
+  inputVerticalMovement: 0
 --- !u!114 &2591307728380868637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,3 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0feed7f93f41bb44699fa9ef8407c55c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disabledMaterial: {fileID: 2100000, guid: 0c91566a5bff3d34facc0cd5bd116391, type: 2}
+  originalMaterial: {fileID: 2100000, guid: 9cfe05c279512db4c9cdcf0ec12629ea, type: 2}
+  speed: 0
+  inputHorizontalMovement: 0
+  inputVerticalMovement: 0

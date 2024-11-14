@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 6013762192106102464}
   - component: {fileID: 6365957305009563577}
   - component: {fileID: 7054543084559543615}
+  - component: {fileID: 1723654152925503805}
   m_Layer: 0
   m_Name: stunEnemyBoost
-  m_TagString: Untagged
+  m_TagString: StunBoost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,3 +123,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be17110aaf6fe9d4aa683b6c4d6f8ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disabledMaterial: {fileID: 2100000, guid: 0c91566a5bff3d34facc0cd5bd116391, type: 2}
+  originalMaterial: {fileID: 2100000, guid: a642fe7d34d36444abec45a7249edd07, type: 2}
+  speed: 0
+  inputHorizontalMovement: 0
+  inputVerticalMovement: 0
+--- !u!114 &1723654152925503805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710370890527345406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8bceb9128b8d34494e7990294d8fbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disabledMaterial: {fileID: 2100000, guid: 0c91566a5bff3d34facc0cd5bd116391, type: 2}
+  originalMaterial: {fileID: 2100000, guid: a642fe7d34d36444abec45a7249edd07, type: 2}
+  speed: 0
+  inputHorizontalMovement: 0
+  inputVerticalMovement: 0

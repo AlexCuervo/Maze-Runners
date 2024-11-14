@@ -1172,7 +1172,7 @@ PrefabInstance:
       objectReference: {fileID: 6017710947779553310, guid: e8b90abc520698e43a97e8922c168cf5, type: 3}
     - target: {fileID: 1215566323243666565, guid: afaa71acec38dc14487c63790afdd7a0, type: 3}
       propertyPath: BoardSize
-      value: 40
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1215566323243666565, guid: afaa71acec38dc14487c63790afdd7a0, type: 3}
       propertyPath: speedBoost

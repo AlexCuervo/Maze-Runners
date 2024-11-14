@@ -8,12 +8,13 @@ using Quaternion = UnityEngine.Quaternion;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
-    float inputVertical;
-    float inputHorizontal;
-    public float speed = 5f;
-    Vector3 lastDirection = new Vector3 (1,0,0);    
+    public float inputVertical;
+    public float inputHorizontal;
+    public float speed = 3f;
+    Vector3 lastDirection = new Vector3 (1,0,0);   
+    public int order = 1;
 
-    private void Movement(){
+    void Movement(){
         
         if(CompareTag("player1"))
         {
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
             inputVertical = Input.GetAxis("Vertical_P2");
         }    
 
-        Vector3 direction = new Vector3 (inputHorizontal, 0 , inputVertical);
+        Vector3 direction = new Vector3 (order* inputHorizontal, 0 , order* inputVertical);
         if(direction != new Vector3 (0,0,0)) lastDirection = direction;
         direction.Normalize();
         transform.position += direction*speed* Time.deltaTime;

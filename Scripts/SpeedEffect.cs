@@ -2,19 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowMoEffect : Effect
+public class SpeedEffect : Effect
 {
-
+   
     public override void ActivateEffect(GameObject target){
-        target.GetComponent<PlayerMovement>().speed = 1f;
-         StartCoroutine(RevertAfterTime(5f));
+        target.GetComponent<PlayerMovement>().speed  += 2f;
+        StartCoroutine(RevertAfterTime(5f));
     }
-
     protected override IEnumerator RevertAfterTime(float duration){
         yield return new WaitForSeconds(duration);
-        if(target.CompareTag("player1"))target.GetComponent<PlayerMovement>().speed = speedPlayer1;
-        else target.GetComponent<PlayerMovement>().speed = speedPlayer2;
-        
+        target.GetComponent<PlayerMovement>().speed  += -2f;
+
         yield return new WaitForSeconds(duration);
         GetComponent<Renderer>().material = originalMaterial;
         isActivated = false;
@@ -27,6 +25,6 @@ public class SlowMoEffect : Effect
 
     void Update()
     {
-
+        
     }
 }
