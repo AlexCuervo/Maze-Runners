@@ -21,7 +21,7 @@ public class invertControlsEffect : Effect
         if(target.CompareTag("player2")){
             GameObject.FindWithTag("player1").GetComponent<PlayerMovement>().order = 1;
         }
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(duration * 2);
         GetComponent<Renderer>().material = originalMaterial;
         isActivated = false;
     }

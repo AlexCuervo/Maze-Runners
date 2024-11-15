@@ -15,7 +15,7 @@ public class SlowMoEffect : Effect
         if(target.CompareTag("player1"))target.GetComponent<PlayerMovement>().speed = speedPlayer1;
         else target.GetComponent<PlayerMovement>().speed = speedPlayer2;
         
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(duration * 2);
         GetComponent<Renderer>().material = originalMaterial;
         isActivated = false;
     }

@@ -11,7 +11,8 @@ public class SpeedEffect : Effect
     }
     protected override IEnumerator RevertAfterTime(float duration){
         yield return new WaitForSeconds(duration);
-        target.GetComponent<PlayerMovement>().speed  += -2f;
+        if(target.CompareTag("player1")) target.GetComponent<PlayerMovement>().speed  = speedPlayer1;
+        else target.GetComponent<PlayerMovement>().speed  = speedPlayer2;
 
         yield return new WaitForSeconds(duration);
         GetComponent<Renderer>().material = originalMaterial;

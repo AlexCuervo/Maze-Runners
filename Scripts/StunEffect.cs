@@ -34,7 +34,7 @@ public class StunEffect : Effect
             target.GetComponent<PlayerMovement>().order = 1;
         }
 
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(duration * 2);
         GetComponent<Renderer>().material = originalMaterial;
         isActivated = false;
     }

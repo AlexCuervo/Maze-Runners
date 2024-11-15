@@ -16,6 +16,7 @@ public class RelocateGoalScript : Effect
         } 
         int randomIndex = Random.Range(0,availableSpots.Count);
         goal.transform.position = availableSpots[randomIndex].position + new Vector3(0,2,0);
+        StartCoroutine(RevertAfterTime(30f));
     }
     void Start()
     {
