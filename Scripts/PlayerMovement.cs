@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(lastDirection);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Movement();
     }

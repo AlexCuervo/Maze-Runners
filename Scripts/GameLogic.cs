@@ -6,12 +6,14 @@ using System;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 using System.Numerics;
+using System.Collections;
 public class GameLogic : MonoBehaviour
 {
     public int BoardSize;
     public GameObject Spot;
     public GameObject Block;
     public Text startLetter;
+    public Image winRoundLetter;
     public GameObject locationTrap;
     public GameObject stunTrap;
     public GameObject slowTrap;
@@ -20,22 +22,50 @@ public class GameLogic : MonoBehaviour
     public GameObject stunEnemyBoost;
     public GameObject invertEnemyControlsBoost;
     public GameObject goal;
+    public bool winRound;
     GameObject player1;
     GameObject player2;
-    bool Started = false;
+    bool started = false;
+    bool isShowedWinRoundLetter = false;
     GameObject MazeArea;
+    private int _scorePlayer1 = 0;
+    private int _scorePlayer2 = 0;
     
     private void ShowStartLetter(){    //this method controls the visibility of the Start Letter
-        if(!Started)startLetter.gameObject.SetActive(true);
-        else startLetter.gameObject.SetActive(false);      
+        if(!started)startLetter.gameObject.SetActive(true);
+        else startLetter.gameObject.SetActive(false);
     }
     
+    private void ShowWinRoundLetter(){
+        winRoundLetter.gameObject.SetActive(true);
+        GameObject.FindWithTag("player1").GetComponent<PlayerMovement>().order = 0;      
+        GameObject.FindWithTag("player2").GetComponent<PlayerMovement>().order = 0;
+        winRoundLetter.transform.GetChild(0).GetComponent<Text>().text = $"{GameObject.FindWithTag("Goal").GetComponent<Goal>().winner.name} wins the round";
+        isShowedWinRoundLetter = true;
+        StartCoroutine(NextRound(1f)); 
+    }
+    private IEnumerator NextRound(float preparation){
+        for(int i = 0; i<5; i++){
+            yield return new WaitForSeconds(preparation);
+            winRoundLetter.transform.GetChild(2).GetComponent<Text>().text = $"{4 - i}";
+            if(winRoundLetter.transform.GetChild(2).GetComponent<Text>().text == "0")winRoundLetter.transform.GetChild(2).GetComponent<Text>().text = "5";
+        }
+        ClearBoard();
+        GenerateMaze(MazeArea);
+        PlacePlayers();
+        PlaceObjects();
+        winRoundLetter.gameObject.SetActive(false);
+        GameObject.FindWithTag("player1").GetComponent<PlayerMovement>().order = 1;      
+        GameObject.FindWithTag("player2").GetComponent<PlayerMovement>().order = 1;
+        isShowedWinRoundLetter = false;
+    }
     private void InstantiateAtPosition(GameObject original, Transform parent, Vector3 localPosition, Vector3 localScale, string tag){
         GameObject item = Instantiate(original);
         item.transform.SetParent(parent, false);
         item.transform.localPosition = localPosition;
         item.transform.localScale = localScale;
         item.tag = tag;
+        item.SetActive(true);
     }
 
     private void PlacePlayers(){
@@ -97,6 +127,14 @@ public class GameLogic : MonoBehaviour
         }
     }
 
+    private void ClearBoard(){
+    for( int i = 0; i < MazeArea.transform.childCount; i++){
+        for(int j = 0; j < MazeArea.transform.GetChild(i).childCount; j++){
+            MazeArea.transform.GetChild(i).GetChild(j).gameObject.SetActive(false);
+        }
+        MazeArea.transform.GetChild(i).DetachChildren();
+    }
+}
     private void MazeDFS(bool[,] mazeMask, int row, int column, int wallToDestroyY, int wallToDestroyX, int[] movesRow, int[] movesColumn, bool[,] visitedSpots){   //DFS algorythm that generates a maze over a boolean matrix
         if(row < 0 || row >= mazeMask.GetLength(0) || column < 0 || column >= mazeMask.GetLength(1))return;
         if(visitedSpots[row,column])return;
@@ -161,19 +199,35 @@ public class GameLogic : MonoBehaviour
         if(BoardSize%2 == 0)BoardSize++;
         GenerateBoard(Spot, MazeArea);
     }
+    void Start(){}
 
     void Update()
     {
         ShowStartLetter();
-        if(Input.GetKeyDown(KeyCode.Space) && !Started){
-            Started = true;
-            GenerateMaze(MazeArea);
-            PlacePlayers();
-            PlaceObjects();
-       }   
-    
-    //   metodo para verificar la condicion de victoria
-    //   
+       // ShowWinRoundLetter();
+        if(!started){
+            if(Input.GetKeyDown(KeyCode.Space)){
+                started = true;
+                GenerateMaze(MazeArea);
+                PlacePlayers();
+                PlaceObjects();
+                goal = GameObject.FindWithTag("Goal");
+                winRoundLetter.gameObject.SetActive(false);
+                GameObject.FindWithTag("player1").GetComponent<PlayerMovement>().order = 1;
+                GameObject.FindWithTag("player2").GetComponent<PlayerMovement>().order = 1;
+            }
+        }
+        else if(GameObject.FindWithTag("Goal")!= null){
+                if(GameObject.FindWithTag("Goal").GetComponent<Goal>().contactWithPlayer && !isShowedWinRoundLetter){
+                    if(GameObject.FindWithTag("Goal").GetComponent<Goal>().winner = player1) _scorePlayer1++;
+                    else _scorePlayer2++;
+                    ShowWinRoundLetter();
+                }
+        }
+
+        if(_scorePlayer1==5 || _scorePlayer2 == 5){
+
+        }
     }
 
 }

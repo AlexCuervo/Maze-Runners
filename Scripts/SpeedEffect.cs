@@ -21,7 +21,8 @@ public class SpeedEffect : Effect
 
     void Start()
     {
-        
+        speedPlayer1 = GameObject.FindWithTag("player1").GetComponent<PlayerMovement>().speed;
+        speedPlayer2 = GameObject.FindWithTag("player2").GetComponent<PlayerMovement>().speed;
     }
 
     void Update()

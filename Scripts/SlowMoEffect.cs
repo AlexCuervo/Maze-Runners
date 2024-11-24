@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class SlowMoEffect : Effect
 {
-
     public override void ActivateEffect(GameObject target){
         target.GetComponent<PlayerMovement>().speed = 1f;
-         StartCoroutine(RevertAfterTime(5f));
+        StartCoroutine(RevertAfterTime(5f));
     }
 
     protected override IEnumerator RevertAfterTime(float duration){
@@ -22,7 +21,8 @@ public class SlowMoEffect : Effect
 
     void Start()
     {
-        
+        speedPlayer1 = GameObject.FindWithTag("player1").GetComponent<PlayerMovement>().speed;
+        speedPlayer2 = GameObject.FindWithTag("player2").GetComponent<PlayerMovement>().speed;
     }
 
     void Update()

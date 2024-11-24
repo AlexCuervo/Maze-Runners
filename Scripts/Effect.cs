@@ -23,8 +23,6 @@ public class Effect : MonoBehaviour
     void OnTriggerEnter(Collider other){
         if((other.CompareTag("player1") || other.CompareTag("player2")) && !isActivated){
             target = other.gameObject;
-            if(target.CompareTag("player1")) speedPlayer1 = target.GetComponent<PlayerMovement>().speed;
-            else speedPlayer2 = target.GetComponent<PlayerMovement>().speed;
             ActivateEffect(other.gameObject);
             transform.GetComponent<Renderer>().material = disabledMaterial;
             isActivated = true;
