@@ -22,3 +22,4 @@ public class Goal : MonoBehaviour
         
     }
 }
+

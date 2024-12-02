@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 using System.Numerics;
 using System.Collections;
+using UnityEngine.SceneManagement;
 public class GameLogic : MonoBehaviour
 {
     public int BoardSize;
@@ -14,6 +15,7 @@ public class GameLogic : MonoBehaviour
     public GameObject Block;
     public Text startLetter;
     public Image winRoundLetter;
+    public Image winGameLetter;
     public GameObject locationTrap;
     public GameObject stunTrap;
     public GameObject slowTrap;
@@ -36,6 +38,14 @@ public class GameLogic : MonoBehaviour
         else startLetter.gameObject.SetActive(false);
     }
     
+    private void ShowWinGameLetter(GameObject gameWinner){
+        // winGameLetter.gameObject.SetActive(true);
+        StartCoroutine(Exit(5f));
+    }
+    private IEnumerator Exit(float delay){
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("Menu");
+    }
     private void ShowWinRoundLetter(){
         winRoundLetter.gameObject.SetActive(true);
         GameObject.FindWithTag("player1").GetComponent<PlayerMovement>().order = 0;      
@@ -75,10 +85,10 @@ public class GameLogic : MonoBehaviour
         GameObject[] players = {player1,player2};
         for(int i = 0; i < startPositions.Length; i++){
             if(i > 1)break;
-            if(startPositionsArray[i]==0)players[i].transform.position = new Vector3(1,1,-1);
-            if(startPositionsArray[i]==1)players[i].transform.position = new Vector3(1,1,-(BoardSize - 2));
-            if(startPositionsArray[i]==2)players[i].transform.position = new Vector3(BoardSize-2,1,-1);
-            if(startPositionsArray[i]==3)players[i].transform.position = new Vector3(BoardSize-2,1,-(BoardSize-2));
+            if(startPositionsArray[i]==0)players[i].transform.position = new Vector3(1,0,-1);
+            if(startPositionsArray[i]==1)players[i].transform.position = new Vector3(1,0,-(BoardSize - 2));
+            if(startPositionsArray[i]==2)players[i].transform.position = new Vector3(BoardSize-2,0,-1);
+            if(startPositionsArray[i]==3)players[i].transform.position = new Vector3(BoardSize-2,0,-(BoardSize-2));
         }
     }
 
@@ -219,15 +229,17 @@ public class GameLogic : MonoBehaviour
         }
         else if(GameObject.FindWithTag("Goal")!= null){
                 if(GameObject.FindWithTag("Goal").GetComponent<Goal>().contactWithPlayer && !isShowedWinRoundLetter){
-                    if(GameObject.FindWithTag("Goal").GetComponent<Goal>().winner = player1) _scorePlayer1++;
+                    if(GameObject.FindWithTag("Goal").GetComponent<Goal>().winner == player1) _scorePlayer1++;
                     else _scorePlayer2++;
                     ShowWinRoundLetter();
                 }
         }
 
-        if(_scorePlayer1==5 || _scorePlayer2 == 5){
-
+        if(_scorePlayer1==5){
+            ShowWinGameLetter(player1);
+        }
+    else if(_scorePlayer2 == 5){
+            ShowWinGameLetter(player2);
         }
     }
-
 }

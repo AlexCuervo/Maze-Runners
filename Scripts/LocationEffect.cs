@@ -14,7 +14,7 @@ public class Locationeffect : Effect
             }
         } 
         int randomIndex = Random.Range(0,availableSpots.Count);
-        target.transform.position = availableSpots[randomIndex].position + new Vector3(0,1,0);
+        target.transform.position = availableSpots[randomIndex].position/* + new Vector3(0,1,0)*/;
         StartCoroutine(RevertAfterTime(15f));
     }
     void Start()
