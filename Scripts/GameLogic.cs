@@ -15,7 +15,6 @@ public class GameLogic : MonoBehaviour
     public GameObject Block;
     public Text startLetter;
     public Image winRoundLetter;
-    public Image winGameLetter;
     public GameObject locationTrap;
     public GameObject stunTrap;
     public GameObject slowTrap;
@@ -25,8 +24,8 @@ public class GameLogic : MonoBehaviour
     public GameObject invertEnemyControlsBoost;
     public GameObject goal;
     public bool winRound;
-    GameObject player1;
-    GameObject player2;
+    public GameObject player1;
+    public GameObject player2;
     bool started = false;
     bool isShowedWinRoundLetter = false;
     GameObject MazeArea;
@@ -37,22 +36,29 @@ public class GameLogic : MonoBehaviour
         if(!started)startLetter.gameObject.SetActive(true);
         else startLetter.gameObject.SetActive(false);
     }
-    
-    private void ShowWinGameLetter(GameObject gameWinner){
-        // winGameLetter.gameObject.SetActive(true);
-        StartCoroutine(Exit(5f));
-    }
     private IEnumerator Exit(float delay){
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene("Menu");
     }
     private void ShowWinRoundLetter(){
-        winRoundLetter.gameObject.SetActive(true);
-        GameObject.FindWithTag("player1").GetComponent<PlayerMovement>().order = 0;      
-        GameObject.FindWithTag("player2").GetComponent<PlayerMovement>().order = 0;
-        winRoundLetter.transform.GetChild(0).GetComponent<Text>().text = $"{GameObject.FindWithTag("Goal").GetComponent<Goal>().winner.name} wins the round";
-        isShowedWinRoundLetter = true;
-        StartCoroutine(NextRound(1f)); 
+        if(_scorePlayer1 < 5 && _scorePlayer2 < 5){
+            winRoundLetter.gameObject.SetActive(true);
+            GameObject.FindWithTag("player1").GetComponent<PlayerMovement>().order = 0;      
+            GameObject.FindWithTag("player2").GetComponent<PlayerMovement>().order = 0;
+            winRoundLetter.transform.GetChild(0).GetComponent<Text>().text = $"{GameObject.FindWithTag("Goal").GetComponent<Goal>().winner.name} wins the round";
+            isShowedWinRoundLetter = true;
+            StartCoroutine(NextRound(1f)); 
+        }
+        else{
+            winRoundLetter.transform.GetChild(0).GetComponent<Text>().text = $"{GameObject.FindWithTag("Goal").GetComponent<Goal>().winner.name} wins the game";
+            winRoundLetter.gameObject.SetActive(true);
+            winRoundLetter.transform.GetChild(1).gameObject.SetActive(false);
+            winRoundLetter.transform.GetChild(2).gameObject.SetActive(false);
+            isShowedWinRoundLetter = true;
+            GameObject.FindWithTag("player1").GetComponent<PlayerMovement>().order = 0;      
+            GameObject.FindWithTag("player2").GetComponent<PlayerMovement>().order = 0;
+            StartCoroutine(Exit(5f));
+        }
     }
     private IEnumerator NextRound(float preparation){
         for(int i = 0; i<5; i++){
@@ -77,7 +83,6 @@ public class GameLogic : MonoBehaviour
         item.tag = tag;
         item.SetActive(true);
     }
-
     private void PlacePlayers(){
 
         int[] startPositions ={0,1,2,3};
@@ -91,7 +96,6 @@ public class GameLogic : MonoBehaviour
             if(startPositionsArray[i]==3)players[i].transform.position = new Vector3(BoardSize-2,0,-(BoardSize-2));
         }
     }
-
     private void PlaceObjects(){
         List<GameObject> availableSpots = new();
         List<GameObject> objectsList = new(){locationTrap, stunTrap, slowTrap, relocateGoalTrap, speedBoost, stunEnemyBoost, invertEnemyControlsBoost};
@@ -112,7 +116,6 @@ public class GameLogic : MonoBehaviour
             if(randomIndex==3)objectsList.Remove(objectsList[3]);
         }        
     }
-
     private int[] RandomizeIntArray(int[] sortedIntArray){       //this method randomizes the order of the elements of an array of integers, used to alternate the movement of the position in the DFS algorythm
         int[] randomizedArray = new int[sortedIntArray.Length];
         List<int> newArray = sortedIntArray.ToList();
@@ -123,7 +126,6 @@ public class GameLogic : MonoBehaviour
         }
         return randomizedArray;
     }
-    
     private void GenerateBoard( GameObject Spot, GameObject Floor){      //this method generates the playable area, organized in cells 
     
         for(int i = 0; i < BoardSize; i++){
@@ -136,7 +138,6 @@ public class GameLogic : MonoBehaviour
             }
         }
     }
-
     private void ClearBoard(){
     for( int i = 0; i < MazeArea.transform.childCount; i++){
         for(int j = 0; j < MazeArea.transform.GetChild(i).childCount; j++){
@@ -209,12 +210,9 @@ public class GameLogic : MonoBehaviour
         if(BoardSize%2 == 0)BoardSize++;
         GenerateBoard(Spot, MazeArea);
     }
-    void Start(){}
-
     void Update()
     {
         ShowStartLetter();
-       // ShowWinRoundLetter();
         if(!started){
             if(Input.GetKeyDown(KeyCode.Space)){
                 started = true;
@@ -235,11 +233,5 @@ public class GameLogic : MonoBehaviour
                 }
         }
 
-        if(_scorePlayer1==5){
-            ShowWinGameLetter(player1);
-        }
-    else if(_scorePlayer2 == 5){
-            ShowWinGameLetter(player2);
-        }
     }
 }
