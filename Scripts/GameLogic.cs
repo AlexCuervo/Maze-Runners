@@ -14,6 +14,8 @@ public class GameLogic : MonoBehaviour
     public GameObject Spot;
     public GameObject Block;
     public Text startLetter;
+    public Text player1ScoreLetter;
+    public Text player2ScoreLetter;
     public Image winRoundLetter;
     public GameObject locationTrap;
     public GameObject stunTrap;
@@ -209,6 +211,8 @@ public class GameLogic : MonoBehaviour
         MazeArea = GameObject.FindGameObjectWithTag("MazeArea");
         if(BoardSize%2 == 0)BoardSize++;
         GenerateBoard(Spot, MazeArea);
+        player1ScoreLetter.gameObject.SetActive(false);
+        player2ScoreLetter.gameObject.SetActive(false);
     }
     void Update()
     {
@@ -216,6 +220,8 @@ public class GameLogic : MonoBehaviour
         if(!started){
             if(Input.GetKeyDown(KeyCode.Space)){
                 started = true;
+                player1ScoreLetter.gameObject.SetActive(true);
+                player2ScoreLetter.gameObject.SetActive(true);
                 GenerateMaze(MazeArea);
                 PlacePlayers();
                 PlaceObjects();

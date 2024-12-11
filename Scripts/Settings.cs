@@ -16,12 +16,7 @@ public class Settings : MonoBehaviour
         if(name == "BackButton"){
             SceneManager.LoadScene("Menu");
         }
-        if(name == "VolumeUp"){
-            if(GetComponentInParent<Text>().text != "10")GetComponentInParent<Text>().text = (int.Parse(GetComponentInParent<Text>().text) + 1).ToString();
-        }
-        if(name == "VolumeDown"){
-            if(GetComponentInParent<Text>().text != "0")GetComponentInParent<Text>().text = (int.Parse(GetComponentInParent<Text>().text) - 1).ToString();
-        }
+        // if(name == "VolumeSlider")
         if(name == "Plus"){
             GetComponentInParent<Text>().text = (int.Parse(GetComponentInParent<Text>().text) + 1).ToString();
         }

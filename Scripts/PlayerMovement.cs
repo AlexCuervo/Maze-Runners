@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 3f;
     Vector3 lastDirection = new Vector3 (1,0,0);   
     public int order = 1;
+    Animator animator;
 
     void Movement(){
         
@@ -32,9 +33,15 @@ public class PlayerMovement : MonoBehaviour
         direction.Normalize();
         transform.position += direction*speed* Time.deltaTime;
         transform.rotation = Quaternion.LookRotation(lastDirection);
+        if(direction != new Vector3 (0,0,0)) animator.SetFloat("movement", 1);
+        else animator.SetFloat("movement", 0);
     }
 
-    void FixedUpdate()
+void Start(){
+    animator = GetComponent<Animator>();
+}
+    
+    void Update()
     {
         Movement();
     }
