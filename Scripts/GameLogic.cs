@@ -17,6 +17,7 @@ public class GameLogic : MonoBehaviour
     public Text player1ScoreLetter;
     public Text player2ScoreLetter;
     public Image winRoundLetter;
+    public Image selectPLayersMenu;
     public GameObject locationTrap;
     public GameObject stunTrap;
     public GameObject slowTrap;
@@ -86,7 +87,8 @@ public class GameLogic : MonoBehaviour
         item.SetActive(true);
     }
     private void PlacePlayers(){
-
+        player1 = GameObject.FindWithTag("player1");
+        player2 = GameObject.FindWithTag("player2");
         int[] startPositions ={0,1,2,3};
         int[] startPositionsArray = RandomizeIntArray(startPositions);
         GameObject[] players = {player1,player2};
@@ -206,8 +208,6 @@ public class GameLogic : MonoBehaviour
     }
     void Awake()
     {
-        player1 = GameObject.FindWithTag("player1");
-        player2 = GameObject.FindWithTag("player2");
         MazeArea = GameObject.FindGameObjectWithTag("MazeArea");
         if(BoardSize%2 == 0)BoardSize++;
         GenerateBoard(Spot, MazeArea);
