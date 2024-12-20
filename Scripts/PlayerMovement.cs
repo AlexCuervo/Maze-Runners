@@ -11,9 +11,11 @@ public class PlayerMovement : MonoBehaviour
     public float inputVertical;
     public float inputHorizontal;
     public float speed = 3f;
-    Vector3 lastDirection = new Vector3 (1,0,0);   
     public int order = 1;
+    Vector3 lastDirection = new Vector3 (1,0,0);   
     Animator animator;
+    public KeyCode specialKey;
+    public bool isVulnerable = true;
 
     void Movement(){
         

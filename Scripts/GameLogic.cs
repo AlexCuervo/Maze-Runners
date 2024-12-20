@@ -44,7 +44,7 @@ public class GameLogic : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
     private void ShowWinRoundLetter(){
-        if(_scorePlayer1 < 5 && _scorePlayer2 < 5){
+        if(_scorePlayer1 < 3 && _scorePlayer2 < 3){
             winRoundLetter.gameObject.SetActive(true);
             GameObject.FindWithTag("player1").GetComponent<PlayerMovement>().order = 0;      
             GameObject.FindWithTag("player2").GetComponent<PlayerMovement>().order = 0;
@@ -208,6 +208,7 @@ public class GameLogic : MonoBehaviour
     }
     void Awake()
     {
+        BoardSize = PlayerPrefs.GetInt("Size");
         MazeArea = GameObject.FindGameObjectWithTag("MazeArea");
         if(BoardSize%2 == 0)BoardSize++;
         GenerateBoard(Spot, MazeArea);

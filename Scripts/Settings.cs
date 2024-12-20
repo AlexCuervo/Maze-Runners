@@ -19,9 +19,11 @@ public class Settings : MonoBehaviour
         // if(name == "VolumeSlider")
         if(name == "Plus"){
             GetComponentInParent<Text>().text = (int.Parse(GetComponentInParent<Text>().text) + 1).ToString();
+            PlayerPrefs.SetInt("Size", int.Parse(GetComponentInParent<Text>().text));
         }
         if(name == "Minus"){
             if(GetComponentInParent<Text>().text != "10")GetComponentInParent<Text>().text = (int.Parse(GetComponentInParent<Text>().text) - 1).ToString();
+            PlayerPrefs.SetInt("Size", int.Parse(GetComponentInParent<Text>().text));
         }
     }
     // Update is called once per frame

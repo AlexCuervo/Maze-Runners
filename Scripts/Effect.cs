@@ -21,7 +21,7 @@ public class Effect : MonoBehaviour
     public virtual void ActivateEffect(GameObject target){}
 
     void OnTriggerEnter(Collider other){
-        if((other.CompareTag("player1") || other.CompareTag("player2")) && !isActivated){
+        if((other.CompareTag("player1") || other.CompareTag("player2")) && !isActivated && other.GetComponent<PlayerMovement>().isVulnerable){
             target = other.gameObject;
             ActivateEffect(other.gameObject);
             transform.GetComponent<Renderer>().material = disabledMaterial;
