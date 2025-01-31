@@ -18,9 +18,9 @@ Maze Runners is a casual 3D game where two players each control a character insi
   - Unity must be installed, and a new project must be created.
    
 ## 🏗 Technologies Used
-  - 🛠 Game Engine: Unity
+  - ⚙️ Game Engine: Unity
   - 💻 Programming Language: C#
 
-## 🔧 Game Construction 
+## 🛠 Game Construction 
   - DFS algorythm to create a Maze of any size
   - Player selection using unity tools such as buttons and tags
